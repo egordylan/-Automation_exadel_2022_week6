@@ -48,7 +48,6 @@ async function (email, password, address1, address2, city, zip, anual, descripti
 
     addAttachment('User\' data: ', user, 'application/json');
     await User.createNewUser(user);
-    //await browser.sharedStore.set(user.email, user);
 });
 
 Then('I go to the List of Users', async function() {
