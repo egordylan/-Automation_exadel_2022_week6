@@ -216,12 +216,13 @@ exports.config = {
     // afterHook: function (test, context, { error, result, duration, passed, retries }) {
     // },
 
-    afterStep: function (step, scenario, result, context) {
+    afterStep: async function (step, scenario, result, context) {
         console.log(step.text);
         // console.log('AFTER STEP::::AFTER STEP::: ' ,{ step });
         // console.log({ result });
         // console.log('SCENARIO', { scenario });
- 
+        // const f =  await scenario.steps;
+        // console.log('PARSE___PARSE ', f)
         // console.log('CONTEXT', { context });
         
         if (step.keyword !== undefined) {

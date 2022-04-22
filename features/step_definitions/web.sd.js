@@ -43,10 +43,10 @@ async function (email, password, address1, address2, city, zip, anual, descripti
         anual: anual,
         description: description,
     };
-
+  
     console.log('User data is here: ', { user });
-
-    addAttachment('User\' data: ', user, 'application/json');
+    this.state.user = user;
+    // addAttachment('User\' data: ', user, 'application/json');
     await User.createNewUser(user);
 });
 
@@ -88,6 +88,9 @@ async function (plan, email, years, total, suspend, description2) {
         description: description2,
     };
 
+    const user = this.state.user;
+    console.log('DATA___DATA::: ', this.state.user);
+    AllureReporter.addAttachment('User\' data: ', user, 'application/json');
     AllureReporter.addAttachment('Subscription data: ', newSubscribe, 'application/json');
     await Subscription.createSubscription(newSubscribe);
 });
