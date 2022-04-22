@@ -1,6 +1,6 @@
 class Table {
     constructor() {
-        this.table = $('.table-responsive');
+        this.table = $('#table');
         this.headersSelector = '.tabulator-col-title';
         this.cellSelector = '.tabulator-cell';
         this.rowSelector = '.tabulator-row';
@@ -9,7 +9,7 @@ class Table {
     async headers() {
         return this.table.$$(this.headersSelector).map(async (header) => {
             return { element: await header, name: await header.getText() };
-        })
+        });
     }
 
     rows() {
@@ -19,17 +19,16 @@ class Table {
     async data() {
         const rows = await this.rows();
         const result = rows.map(async (row) => {
-                let result = {};
-                const cells = await row.$$(this.cellSelector);
-                let index = 0;
-                for (const cell of cells) {
-                    console.log(await cell.getText());
-                    result[(await this.headers())[index].name] = await cell;
-                    index += 1;
-                }
-                return result;
+            let result = {};
+            const cells = await row.$$(this.cellSelector);
+            let index = 0;
+            for (const cell of cells) {
+                result[(await this.headers())[index].name] = (await cell.getText()).trim();
+                index += 1;
             }
-        )
+            // console.log('RESULT:::::::', result);
+            return result;
+        });
         return await Promise.all(result);
     }
 }

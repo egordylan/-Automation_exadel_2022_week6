@@ -61,7 +61,7 @@ const localCaps = [{
 }]
 
 const bsServices = ['browserstack'];
-const localServices = ['chromedriver'];
+const localServices = ['chromedriver', 'shared-store'];
 exports.config = {
     user: process.env.USER,
     key: process.env.KEY,
@@ -217,10 +217,13 @@ exports.config = {
     // },
 
     afterStep: function (step, scenario, result, context) {
-        // console.log({ step });
+        console.log(step.text);
+        // console.log('AFTER STEP::::AFTER STEP::: ' ,{ step });
         // console.log({ result });
-        // console.log({ scenario });
-        // console.log({ context });
+        // console.log('SCENARIO', { scenario });
+ 
+        // console.log('CONTEXT', { context });
+        
         if (step.keyword !== undefined) {
             const content = {
                 content: '123',
@@ -243,7 +246,15 @@ exports.config = {
      */
     afterTest: async function (test, context, { error, result, duration, passed, retries }) {
         if (!passed) {
-            await browser.takeScreenshot();
+            //await browser.takeScreenshot();
+            // my logics
+            addAttachment('screenshot_homework', Buffer(await browser.takeScreenshot(), 'base64'), 'image/png');
+
+            const htmlCode = await $('html').getHTML();
+            addAttachment('HTML_data_homework', htmlCode, 'text/html');
+
+            const cookies = JSON.stringify(await browser.getAllCookies());
+            addAttachment('cookies_homework', cookies, 'text/plain');
         }
     },
 
@@ -252,13 +263,23 @@ exports.config = {
             world.result.status = 'FAILED'
         }
         console.log({result})
-        console.log(result.passed)
+        console.log('Is passed: ', result.passed)
         console.log(result.passed)
         console.log(result.passed)
         addDescription('TESTTESTTEST!!! <script>alert(123)</script>')
 
         if (!result.passed) {
-            addDescription('TESTTESTTEST!!!<img src="https://s.keepmeme.com/files/en_posts/20200908/blurred-surprised-cat-meme-5b734a45210ef3b6657bcbe2831715fa.jpg">')
+            addDescription('TESTTESTTEST!!!<img src="https://s.keepmeme.com/files/en_posts/20200908/blurred-surprised-cat-meme-5b734a45210ef3b6657bcbe2831715fa.jpg">');
+
+            // my logics
+            addAttachment('screenshot_homework', Buffer.from(await browser.takeScreenshot(), 'base64'), 'image/png');
+
+            const htmlCode = await $('html').getHTML();
+            addAttachment('HTML_data_homework', htmlCode, 'text/html');
+
+            const cookies = JSON.stringify(await browser.getAllCookies());
+            console.log('cookies: ', cookies);
+            addAttachment('cookies_homework', cookies, 'text/plain');
         }
         // await browser.reloadSession();
     },

@@ -18,7 +18,7 @@ describe('Login', function () {
         { login: 'dlink', password: 'dlink', msg: 'Fail to login' },
         { login: 'user', password: '', msg: 'Password is empty' },
         { login: 'admin', password: '', msg: 'Password is empty' },
-        { login: '', password: '', msg: 'Login is empty' },
+        { login: '1', password: '', msg: 'Login is empty' },
     ]
 
     for (const user of testData) {
@@ -28,3 +28,4 @@ describe('Login', function () {
         });
     }
 });
+// npx wdio wdio.conf.js --spec specs/login-layout-ddd.e2e.js
