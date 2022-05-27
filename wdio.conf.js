@@ -224,7 +224,7 @@ exports.config = {
         // const f =  await scenario.steps;
         // console.log('PARSE___PARSE ', f)
         // console.log('CONTEXT', { context });
-        
+
         if (step.keyword !== undefined) {
             const content = {
                 content: '123',
@@ -250,12 +250,6 @@ exports.config = {
             //await browser.takeScreenshot();
             // my logics
             addAttachment('screenshot_homework', Buffer(await browser.takeScreenshot(), 'base64'), 'image/png');
-
-            const htmlCode = await $('html').getHTML();
-            addAttachment('HTML_data_homework', htmlCode, 'text/html');
-
-            const cookies = JSON.stringify(await browser.getAllCookies());
-            addAttachment('cookies_homework', cookies, 'text/plain');
         }
     },
 
@@ -275,12 +269,6 @@ exports.config = {
             // my logics
             addAttachment('screenshot_homework', Buffer.from(await browser.takeScreenshot(), 'base64'), 'image/png');
 
-            const htmlCode = await $('html').getHTML();
-            addAttachment('HTML_data_homework', htmlCode, 'text/html');
-
-            const cookies = JSON.stringify(await browser.getAllCookies());
-            console.log('cookies: ', cookies);
-            addAttachment('cookies_homework', cookies, 'text/plain');
         }
         // await browser.reloadSession();
     },

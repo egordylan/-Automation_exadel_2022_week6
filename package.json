@@ -10,7 +10,7 @@
     "@wdio/shared-store-service": "^7.19.5",
     "@wdio/spec-reporter": "^7.16.4",
     "allure-commandline": "^2.13.8",
-    "chromedriver": "^100.0.0",
+    "chromedriver": "^101.0.0",
     "wdio-chromedriver-service": "^7.2.2"
   },
   "scripts": {
