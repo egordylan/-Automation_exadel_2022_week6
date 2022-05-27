@@ -37,3 +37,4 @@ describe("Check app", function () {
         assertAll(softAssertsErrors);
     });
 });
+// npx wdio wdio.conf.js --spec specs/softAssert.e2e.js
